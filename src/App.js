@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';  // Importing a CSS file for styling
@@ -36,7 +37,7 @@ const App = () => {
       <h1 className="title">Online Test Platform</h1>
       <form onSubmit={handleSubmit} className="test-form">
         {tests.map((test) => (
-          <div key={test.id} className="test-section">
+          <div key={test._id} className="test-section">
             <h2 className="test-title">{test.title}</h2>
             {test.questions.map((q, index) => (
               <div key={index} className="question-container">
@@ -47,10 +48,10 @@ const App = () => {
                       <label className="option-label">
                         <input
                           type="radio"
-                          name={`question-${test.id}-${index}`}
+                          name={`question-${test._id}-${index}`}
                           value={option.text}
-                          checked={selectedAnswers[`${test.id}-${index}`] === option.text}
-                          onChange={() => handleAnswerChange(test.id, index, option.text)}
+                          checked={selectedAnswers[`${test._id}-${index}`] === option.text}
+                          onChange={() => handleAnswerChange(test._id, index, option.text)}
                           disabled={showAnswers}  // Disable radio buttons after showing answers
                         />
                         {option.image && <img src={option.image} alt={option.text} className="option-image" />}
@@ -59,10 +60,10 @@ const App = () => {
                     </li>
                   ))}
                 </ul>
-                {showAnswers && selectedAnswers[`${test.id}-${index}`] && (
-                  <div className={`answer-result ${selectedAnswers[`${test.id}-${index}`] === q.answer ? 'correct' : 'incorrect'}`}>
+                {showAnswers && selectedAnswers[`${test._id}-${index}`] && (
+                  <div className={`answer-result ${selectedAnswers[`${test._id}-${index}`] === q.answer ? 'correct' : 'incorrect'}`}>
                     <p>
-                      Your answer: {selectedAnswers[`${test.id}-${index}`]} <br />
+                      Your answer: {selectedAnswers[`${test._id}-${index}`]} <br />
                       Correct answer: {q.answer}
                     </p>
                   </div>
